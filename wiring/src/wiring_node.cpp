@@ -1,21 +1,23 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-#include "wiringPi.h"
-
+#include <string>
+extern "C" {
+#include <wiringPi.h>
+}
 
 void gpio(const std_msgs::String::ConstPtr& msg)
 {
-	std_msgs::String s = msg->data.c_str();
-	std_msgs::String delimiter = " ";
+	std::string s = msg->data.c_str();
+	std::string delimiter = " ";
 	std::vector<int> listOfData;
 	size_t pos = 0;
-	std_msgs::String token;
-	while ((pos = s.find(delimiter)) != std_msgs::String::npos) {
+	std::string token;
+	while ((pos = s.find(delimiter)) != std::string::npos) {
 		token = s.substr(0, pos);
-		listOfData.push_back(std_msgs::stoi(token));
+		listOfData.push_back(std::stoi(token));
 		s.erase(0, pos + delimiter.length());
 	}
-	listOfData.push_back(std_msgs::stoi(s));
+	listOfData.push_back(std::stoi(s));
 	if (listOfData.at(0))
 	{
 		pinMode(listOfData.at(1), OUTPUT);
