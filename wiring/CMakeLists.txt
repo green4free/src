@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(wiring)
-set(CMAKE_CXX_FLAGS "-std=c++0x -lwiringPi ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -188,10 +188,6 @@ include_directories(
 # catkin_add_nosetests(test)
 
 include_directories(include ${catkin_INCLUDE_DIRS})
-
-add_executable(gpio src/wiring_node.cpp)
-target_link_libraries(gpio ${catkin_LIBRARIES})
-add_dependencies(gpio wiring)
 
 add_executable(gpioInput src/wiring_input.cpp)
 target_link_libraries(gpioInput ${catkin_LIBRARIES})
