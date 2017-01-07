@@ -8,6 +8,7 @@ extern "C" {
 void gpio(const std_msgs::String::ConstPtr& msg)
 {
 	std::string s = msg->data.c_str();
+	ROS_INFO("%s", msg->data.c_str());
 	std::string delimiter = " ";
 	std::vector<int> listOfData;
 	size_t pos = 0;
@@ -24,7 +25,13 @@ void gpio(const std_msgs::String::ConstPtr& msg)
 	}
 	else
 	{
-		digitalWrite(listOfData.at(1), listOfData.at(2));
+		if (listOfData.at(2)){
+			digitalWrite(listOfData.at(1), HIGH);
+		}
+		else
+		{
+			digitalWrite(listOfData.at(1), LOW);
+		}
 	}	
 }
 
