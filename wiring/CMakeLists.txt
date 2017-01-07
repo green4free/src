@@ -186,3 +186,13 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+include_directories(include ${catkin_INCLUDE_DIRS})
+
+add_executable(gpio src/wiring_node.cpp)
+target_link_libraries(gpio ${catkin_LIBRARIES})
+add_dependencies(gpio wiring)
+
+add_executable(gpioInput src/wiring_input.cpp)
+target_link_libraries(gpioInput ${catkin_LIBRARIES})
+add_dependencies(gpioInput wiring)
